@@ -89,6 +89,66 @@ void P7(char cadena[]) {
     *pEscribir = '\0';
 }
 
+void P9() {
+    int n;
+    char cadena[100];
+
+    cout << "Ingrese n: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "n debe ser mayor que cero" << endl;
+        return;
+    }
+
+    cout << "Ingrese la cadena de numeros: ";
+    cin >> cadena;
+
+    char *pCadena = cadena;
+    int longitud = 0;
+
+    while (*pCadena != '\0') {
+        longitud++;
+        pCadena++;
+    }
+
+    // Apuntar al ultimo caracter numerico
+    pCadena = cadena + longitud - 1;
+
+    int suma = 0;
+    int numeroGrupo = 0;
+    int posicion = 1;
+    int contador = 0;
+
+    // Recorrer de derecha a izquierda
+    while (pCadena >= cadena) {
+        int digito = *pCadena - '0';
+
+        numeroGrupo = numeroGrupo + digito * posicion;
+
+        posicion = posicion * 10;
+        contador++;
+
+        // Se completo un grupo de n cifras
+        if (contador == n) {
+            suma = suma + numeroGrupo;
+
+            numeroGrupo = 0;
+            posicion = 1;
+            contador = 0;
+        }
+
+        pCadena--;
+    }
+
+    // Es equivalente a agregar ceros a su izquierda.
+    if (contador > 0) {
+        suma = suma + numeroGrupo;
+    }
+
+    cout << "Original: " << cadena << endl;
+    cout << "Suma: " << suma << endl;
+}
 
 int main(){
     int x,a,b,c=0;
@@ -154,7 +214,7 @@ int main(){
 
     case 9:
         while(true){
-
+            P9();
         }
 
     default:
