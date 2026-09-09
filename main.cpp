@@ -42,6 +42,26 @@ bool compararCadenas(const char *cadena1, const char *cadena2) {
     return false;
 }
 
+void P5(int numero, char cadena[]) {
+    int copia = numero;
+    int digitos = 0;
+
+    while (copia > 0) {
+        digitos++;
+        copia = copia / 10;
+    }
+
+    char *pCadena = cadena + digitos - 1;
+
+    while (numero > 0) {
+        *pCadena = (numero % 10) + '0';
+        numero = numero / 10;
+        pCadena--;
+    }
+
+    cadena[digitos] = '\0';
+}
+
 
 int main(){
     int x,a,b,c=0;
@@ -79,7 +99,20 @@ int main(){
 
     case 5:
         while(true){
+            int numero;
+            char cadena[12]; //int 2147483647 maximo 10 bits
 
+            cout << "Ingrese un numero mayor que cero: ";
+            cin >> numero;
+
+            if (numero <= 0) {
+                cout << "El numero debe ser mayor que cero" << endl;
+            }
+            else {
+                P5(numero, cadena);
+
+                cout << "La cadena es: " << cadena << endl;
+            }
         }
 
     case 7:
