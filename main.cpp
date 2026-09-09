@@ -25,6 +25,23 @@ void P1(int cantidad){
     }
 }
 
+bool compararCadenas(const char *cadena1, const char *cadena2) {
+
+    while (*cadena1 != '\0' && *cadena2 != '\0') {
+        if (*cadena1 != *cadena2) {
+            return false;
+        }
+        cadena1++;
+        cadena2++;
+    }
+
+    if (*cadena1 == '\0' && *cadena2 == '\0') {
+        return true;
+    }
+
+    return false;
+}
+
 
 int main(){
     int x,a,b,c=0;
@@ -43,7 +60,21 @@ int main(){
 
     case 3:
         while(true){
+            char cadena1[100];
+            char cadena2[100];
 
+            cout << "Ingrese la primera cadena: " << endl;
+            cin >> cadena1; //getline me reserva una posicion para añadir final de trama(error: preguntar)
+
+            cout << "Ingrese la segunda cadena: " << endl;
+            cin >> cadena2;
+
+            if (compararCadenas(cadena1, cadena2)) {
+                cout << "Las cadenas son iguales" << endl;
+            }
+            else {
+                cout << "Las cadenas son diferentes" << endl;
+            }
         }
 
     case 5:
