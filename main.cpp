@@ -62,6 +62,33 @@ void P5(int numero, char cadena[]) {
     cadena[digitos] = '\0';
 }
 
+void P7(char cadena[]) {
+    char *pLeer = cadena;
+    char *pEscribir = cadena;
+
+    while (*pLeer != '\0') {
+        bool repetido = false;
+
+        for (char *pRevisar = cadena; pRevisar < pEscribir; pRevisar++) {
+            if (*pRevisar == *pLeer) {
+                repetido = true;
+                break;
+            }
+        }
+
+        // Si no estaba repetido, se guarda en la nueva cadena
+        if (repetido == false) {
+            *pEscribir = *pLeer;
+            pEscribir++;
+        }
+
+        pLeer++;
+    }
+
+    // Marcar el nuevo final de la cadena
+    *pEscribir = '\0';
+}
+
 
 int main(){
     int x,a,b,c=0;
@@ -117,7 +144,12 @@ int main(){
 
     case 7:
         while(true){
-
+            char cadena[100];
+            cout << "Ingrese una cadena: ";
+            cin >> cadena;
+            cout << "Original: " << cadena << endl;
+            P7(cadena);
+            cout << "Sin repetidos: " << cadena << endl;
         }
 
     case 9:
