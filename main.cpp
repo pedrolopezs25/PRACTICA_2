@@ -5,32 +5,6 @@ using namespace std;
 #include <iostream>
 using namespace std;
 
-
-
-int contarEstrellas(int *matriz, int filas, int columnas) {
-    int estrellas = 0;
-
-    // No se revisan los bordes
-    for (int i = 1; i < filas - 1; i++) {
-        for (int j = 1; j < columnas - 1; j++) {
-
-            int posicion = i * columnas + j;
-
-            int suma = *(matriz + posicion)
-                       + *(matriz + posicion - 1)
-                       + *(matriz + posicion + 1)
-                       + *(matriz + posicion - columnas)
-                       + *(matriz + posicion + columnas);
-
-            if (suma > 30) {
-                estrellas++;
-            }
-        }
-    }
-
-    return estrellas;
-}
-
 int main(){
     int x,a,b,c=0;
 
@@ -108,16 +82,70 @@ int main(){
             int matriz[6][8] = {
                 {0, 3, 4, 0, 0, 0, 6, 8},
                 {5, 13, 6, 0, 0, 2, 3, 0},
-                {2, 6, 2, 7, 3, 0, 10, 0},
+                {2, 6, 2, 7, 3, 3, 10, 9},
                 {0, 0, 4, 15, 4, 1, 6, 0},
-                {5, 17, 7, 12, 6, 9, 10, 4},
+                {5, 0, 7, 2, 6, 9, 10, 4},
                 {5, 2, 6, 10, 6, 4, 8, 0}
             };
 
-            int resultado = contarEstrellas(*matriz, 6, 8);
+            int resultado = P13(*matriz, 6, 8);
 
             cout << "Numero de estrellas: " << resultado << endl;
             return 0;
+        }
+    case 15:
+        while(true){
+            int A[4];
+            int B[4];
+            int C[4];
+
+            cout << "RECTANGULO A" << endl;
+            cout << "Ingrese x: ";
+            cin >> A[0];
+
+            cout << "Ingrese y: ";
+            cin >> A[1];
+
+            cout << "Ingrese ancho: ";
+            cin >> A[2];
+
+            cout << "Ingrese alto: ";
+            cin >> A[3];
+
+            cout << endl;
+
+            cout << "RECTANGULO B" << endl;
+            cout << "Ingrese x: ";
+            cin >> B[0];
+
+            cout << "Ingrese y: ";
+            cin >> B[1];
+
+            cout << "Ingrese ancho: ";
+            cin >> B[2];
+
+            cout << "Ingrese alto: ";
+            cin >> B[3];
+
+            if (seCruzan(A, B)) {
+                calcularC(A, B, C);
+
+                cout << endl;
+                cout << "Los rectangulos si se cruzan." << endl;
+                cout << "Rectangulo C = { ";
+
+                for (int i = 0; i < 4; i++) {
+                    cout << C[i];
+                    if (i < 3) {
+                        cout << ", ";
+                    }
+                }
+                cout << " }" << endl;
+            }
+            else {
+                cout << endl;
+                cout << "Los rectangulos no se cruzan." << endl;
+            }
         }
 
     default:

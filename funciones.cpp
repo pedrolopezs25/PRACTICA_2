@@ -252,3 +252,93 @@ void P11() {
     }
 
 }
+
+int P13(int *matriz, int filas, int columnas) {
+    int estrellas = 0;
+
+    // No se revisan los bordes
+    for (int i = 1; i < filas - 1; i++) {
+        for (int j = 1; j < columnas - 1; j++) {
+
+            int posicion = i * columnas + j;
+
+            int suma = *(matriz + posicion)
+                       + *(matriz + posicion - 1)
+                       + *(matriz + posicion + 1)
+                       + *(matriz + posicion - columnas)
+                       + *(matriz + posicion + columnas);
+
+            if (suma > 30) {
+                cout << "estrella en: " << posicion << endl;
+                estrellas++;
+            }
+        }
+    }
+
+    return estrellas;
+}
+bool seCruzan(int *A, int *B) {
+    int izquierdaA = A[0];
+    int arribaA = A[1];
+    int derechaA = A[0] + A[2];
+    int abajoA = A[1] + A[3];
+
+    int izquierdaB = B[0];
+    int arribaB = B[1];
+    int derechaB = B[0] + B[2];
+    int abajoB = B[1] + B[3];
+
+    if (derechaA <= izquierdaB) {
+        return false;
+    }
+    if (derechaB <= izquierdaA) {
+        return false;
+    }
+    if (abajoA <= arribaB) {
+        return false;
+    }
+    if (abajoB <= arribaA) {
+        return false;
+    }
+
+    return true;
+}
+void calcularC(int *A, int *B, int *C) {
+    if (A[0] > B[0]) {
+        C[0] = A[0];
+    }
+    else {
+        C[0] = B[0];
+    }
+
+    if (A[1] > B[1]) {
+        C[1] = A[1];
+    }
+    else {
+        C[1] = B[1];
+    }
+
+    int derechaA = A[0] + A[2];
+    int derechaB = B[0] + B[2];
+    int derechaC;
+
+    if (derechaA < derechaB) {
+        derechaC = derechaA;
+    }
+    else {
+        derechaC = derechaB;
+    }
+
+    int abajoA = A[1] + A[3];
+    int abajoB = B[1] + B[3];
+    int abajoC;
+
+    if (abajoA < abajoB) {
+        abajoC = abajoA;
+    }
+    else {
+        abajoC = abajoB;
+    }
+    C[2] = derechaC - C[0];
+    C[3] = abajoC - C[1];
+}
