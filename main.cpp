@@ -4,6 +4,62 @@ using namespace std;
 
 #include <iostream>
 using namespace std;
+int sumaDivisores(int numero) {
+    int suma = 0;
+
+    for (int i = 1; i < numero; i++) {
+        if (numero % i == 0) {
+            suma = suma + i;
+        }
+    }
+
+    return suma;
+}
+bool sonAmigables(int a, int b) {
+    if (a == b) {
+        cout << " a debe ser diferente de b" << endl;
+        return false;
+    }
+
+    if (sumaDivisores(a) == b && sumaDivisores(b) == a) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+int P17(int limite) {
+    int sumaTotal = 0;
+    bool encontroPareja = false;
+
+    cout << "Parejas amigables menores que "
+         << limite << ":" << endl;
+
+    for (int a = 2; a < limite; a++) {
+        int b = sumaDivisores(a);
+
+        if (a < b && b < limite && sonAmigables(a, b)) {
+            cout << a << " y " << b
+                 << " son amigables." << endl;
+
+            cout << "Suma de divisores de " << a
+                 << ": " << sumaDivisores(a) << endl;
+
+            cout << "Suma de divisores de " << b
+                 << ": " << sumaDivisores(b) << endl;
+
+            cout << endl;
+
+            sumaTotal = sumaTotal + a + b;
+            encontroPareja = true;
+        }
+    }
+
+    if (!encontroPareja) {
+        cout << "No se encontraron parejas amigables." << endl;
+    }
+    return sumaTotal;
+}
 
 int main(){
     int x,a,b,c=0;
@@ -146,6 +202,20 @@ int main(){
                 cout << endl;
                 cout << "Los rectangulos no se cruzan." << endl;
             }
+        }
+    case 17:
+        while(true){
+            int limite;
+            cout<<"Ingrese un numero n para encontrar sus parejas amigables: "<< endl;
+            cin >> limite;
+            if(limite <= 0){
+                cout<<"El numero tiene que ser mayor a 0" << endl;
+                return 0;
+            }
+            int resultado = P17(limite);
+
+            cout << "El resultado de la suma es: "
+                 << resultado << endl;
         }
 
     default:
