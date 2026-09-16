@@ -10,4 +10,5 @@ void P5(int numero, char cadena[]);
 void P7(char cadena[]);
 
 void P9();
+void P11();
 #endif // FUNCIONES_H

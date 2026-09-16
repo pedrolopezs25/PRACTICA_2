@@ -5,116 +5,31 @@ using namespace std;
 #include <iostream>
 using namespace std;
 
-void P11() {
-    int filas = 15;
-    int asientos = 20;
-    int opcion = 0;
 
-    // Reservar memoria para 15 x 20 = 300 asientos
-    char *sala = new char[filas * asientos];
 
-    // Inicializar todos los asientos como disponibles
-    for (int i = 0; i < filas * asientos; i++) {
-        *(sala + i) = '-';
-    }
-    while (opcion != 4) {
-        cout << endl;
-        cout << "1. Mostrar sala" << endl;
-        cout << "2. Reservar asiento" << endl;
-        cout << "3. Cancelar reserva" << endl;
-        cout << "4. Salir" << endl;
-        cout << "Opcion: ";
-        cin >> opcion;
+int contarEstrellas(int *matriz, int filas, int columnas) {
+    int estrellas = 0;
 
-        switch (opcion) {
-        case 1:
-            for (int i = 0; i < filas; i++) {
-                cout << char('A' + i) << " ";
+    // No se revisan los bordes
+    for (int i = 1; i < filas - 1; i++) {
+        for (int j = 1; j < columnas - 1; j++) {
 
-                for (int j = 0; j < asientos; j++) {
-                    cout << *(sala + i * asientos + j) << " ";
-                }
+            int posicion = i * columnas + j;
 
-                cout << endl;
+            int suma = *(matriz + posicion)
+                       + *(matriz + posicion - 1)
+                       + *(matriz + posicion + 1)
+                       + *(matriz + posicion - columnas)
+                       + *(matriz + posicion + columnas);
+
+            if (suma > 30) {
+                estrellas++;
             }
-            break;
-
-        case 2: {
-            char letra;
-            int numero;
-
-            cout << "Fila (A-O): ";
-            cin >> letra;
-
-            cout << "Asiento (1-20): ";
-            cin >> numero;
-
-            int fila = letra - 'A';
-            int asiento = numero - 1;
-
-            if (fila < 0 || fila >= filas || asiento < 0 || asiento >= asientos ) {
-                cout << "Asiento invalido" << endl;
-            }
-            else {
-                char *pAsiento = sala + fila * asientos + asiento;
-                cout << *pAsiento << " " << pAsiento << endl;
-                if (*pAsiento == '+') {
-                    cout << "El asiento ya esta reservado" << endl;
-                }
-                else {
-                    *pAsiento = '+';
-                    cout << "Reserva realizada" << endl;
-                }
-                break;
-            }
-
-            break;
-        }
-
-        case 3: {
-            char letra;
-            int numero;
-
-            cout << "Fila (A-O): ";
-            cin >> letra;
-
-            cout << "Asiento (1-20): ";
-            cin >> numero;
-
-            int fila = letra - 'A';
-            int asiento = numero - 1;
-
-            if (fila < 0 || fila >= filas || asiento < 0 || asiento >= asientos) {
-                cout << "Asiento invalido" << endl;
-            }
-            else {
-                char *pAsiento = sala + fila * asientos + asiento;
-
-                if (*pAsiento == '-') {
-                    cout << "El asiento ya esta disponible" << endl;
-                }
-                else {
-                    *pAsiento = '-';
-                    cout << "Cancelacion realizada" << endl;
-                }
-            }
-
-            break;
-        }
-
-        case 4:
-            cout << "Saliendo" << endl;
-            break;
-
-        default:
-            cout << "Opcion invalida" << endl;
-            break;
         }
     }
 
+    return estrellas;
 }
-
-
 
 int main(){
     int x,a,b,c=0;
@@ -186,6 +101,22 @@ int main(){
     case 11:
         while(true){
             P11();
+            return 0;
+        }
+    case 13:
+        while(true){
+            int matriz[6][8] = {
+                {0, 3, 4, 0, 0, 0, 6, 8},
+                {5, 13, 6, 0, 0, 2, 3, 0},
+                {2, 6, 2, 7, 3, 0, 10, 0},
+                {0, 0, 4, 15, 4, 1, 6, 0},
+                {5, 17, 7, 12, 6, 9, 10, 4},
+                {5, 2, 6, 10, 6, 4, 8, 0}
+            };
+
+            int resultado = contarEstrellas(*matriz, 6, 8);
+
+            cout << "Numero de estrellas: " << resultado << endl;
             return 0;
         }
 
