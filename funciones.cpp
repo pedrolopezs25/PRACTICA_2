@@ -43,7 +43,7 @@ bool compararCadenas(const char *cadena1, const char *cadena2) {
     return false;
 }
 
-void P5(int numero, char cadena[]) {
+void P5(int numero, char cadena[])   {
     int copia = numero;
     int digitos = 0;
 
@@ -85,8 +85,6 @@ void P7(char cadena[]) {
 
         pLeer++;
     }
-
-    // Marcar el nuevo final de la cadena
     *pEscribir = '\0';
 }
 
@@ -112,10 +110,7 @@ void P9() {
         longitud++;
         pCadena++;
     }
-
-    // Apuntar al ultimo caracter numerico
     pCadena = cadena + longitud - 1;
-
     int suma = 0;
     int numeroGrupo = 0;
     int posicion = 1;
@@ -131,7 +126,7 @@ void P9() {
 
         if (contador == n) {
             suma = suma + numeroGrupo;
-
+            cout << numeroGrupo << " + " ;
             numeroGrupo = 0;
             posicion = 1;
             contador = 0;
@@ -139,12 +134,12 @@ void P9() {
 
         pCadena--;
     }
-
-    // Es equivalente a agregar ceros a la izquierda
+    //no ha llegado a cero la cantidad de n pero necesito sumar
     if (contador > 0) {
         suma = suma + numeroGrupo;
+        cout << numeroGrupo ;
     }
-
+    cout <<" = " << suma <<endl;
     cout << "Original: " << cadena << endl;
     cout << "Suma: " << suma << endl;
 }
