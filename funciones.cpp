@@ -43,7 +43,7 @@ bool compararCadenas(const char *cadena1, const char *cadena2) {
     return false;
 }
 
-void P5(int numero, char cadena[])   {
+void P5(int numero, char (&cadena)[20])   {
     int copia = numero;
     int digitos = 0;
 
@@ -52,12 +52,13 @@ void P5(int numero, char cadena[])   {
         copia = copia / 10;
     }
 
-    char *pCadena = cadena + digitos - 1;
+    //char *pCadena = cadena + digitos - 1;
+    int posicion = digitos - 1;
 
     while (numero > 0) {
-        *pCadena = (numero % 10) + '0';
+        cadena[posicion] = (numero % 10) + '0';
         numero = numero / 10;
-        pCadena--;
+        posicion--;
     }
 
     cadena[digitos] = '\0';
@@ -341,4 +342,61 @@ void calcularC(int *A, int *B, int *C) {
     }
     C[2] = derechaC - C[0];
     C[3] = abajoC - C[1];
+}
+
+int sumaDivisores(int numero) {
+    int suma = 0;
+
+    for (int i = 1; i < numero; i++) {
+        if (numero % i == 0) {
+            suma = suma + i;
+        }
+    }
+
+    return suma;
+}
+bool sonAmigables(int a, int b) {
+    if (a == b) {
+        cout << " a debe ser diferente de b" << endl;
+        return false;
+    }
+
+    if (sumaDivisores(a) == b && sumaDivisores(b) == a) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+int P17(int limite) {
+    int sumaTotal = 0;
+    bool encontroPareja = false;
+
+    cout << "Parejas amigables menores que "
+         << limite << ":" << endl;
+
+    for (int a = 2; a < limite; a++) {
+        int b = sumaDivisores(a);
+
+        if (a < b && b < limite && sonAmigables(a, b)) {
+            cout << a << " y " << b
+                 << " son amigables." << endl;
+
+            cout << "Suma de divisores de " << a
+                 << ": " << sumaDivisores(a) << endl;
+
+            cout << "Suma de divisores de " << b
+                 << ": " << sumaDivisores(b) << endl;
+
+            cout << endl;
+
+            sumaTotal = sumaTotal + a + b;
+            encontroPareja = true;
+        }
+    }
+
+    if (!encontroPareja) {
+        cout << "No se encontraron parejas amigables." << endl;
+    }
+    return sumaTotal;
 }

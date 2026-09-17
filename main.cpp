@@ -4,62 +4,6 @@ using namespace std;
 
 #include <iostream>
 using namespace std;
-int sumaDivisores(int numero) {
-    int suma = 0;
-
-    for (int i = 1; i < numero; i++) {
-        if (numero % i == 0) {
-            suma = suma + i;
-        }
-    }
-
-    return suma;
-}
-bool sonAmigables(int a, int b) {
-    if (a == b) {
-        cout << " a debe ser diferente de b" << endl;
-        return false;
-    }
-
-    if (sumaDivisores(a) == b && sumaDivisores(b) == a) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-int P17(int limite) {
-    int sumaTotal = 0;
-    bool encontroPareja = false;
-
-    cout << "Parejas amigables menores que "
-         << limite << ":" << endl;
-
-    for (int a = 2; a < limite; a++) {
-        int b = sumaDivisores(a);
-
-        if (a < b && b < limite && sonAmigables(a, b)) {
-            cout << a << " y " << b
-                 << " son amigables." << endl;
-
-            cout << "Suma de divisores de " << a
-                 << ": " << sumaDivisores(a) << endl;
-
-            cout << "Suma de divisores de " << b
-                 << ": " << sumaDivisores(b) << endl;
-
-            cout << endl;
-
-            sumaTotal = sumaTotal + a + b;
-            encontroPareja = true;
-        }
-    }
-
-    if (!encontroPareja) {
-        cout << "No se encontraron parejas amigables." << endl;
-    }
-    return sumaTotal;
-}
 
 int main(){
     int x,a,b,c=0;
@@ -98,7 +42,7 @@ int main(){
     case 5:
         while(true){
             int numero;
-            char cadena[12]; //int 2147483647 maximo 10 bits
+            char cadena[20]; //int 2147483647 maximo 10 bits
 
             cout << "Ingrese un numero mayor que cero: ";
             cin >> numero;
